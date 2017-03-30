@@ -10,14 +10,16 @@ def exec_recurring_payment(
     shopper_email,
     merchant_reference,
     payment_amount,
-    currency_code
+    currency_code,
+    cvc=None
 ):
-    return payment_api_request(
-        'authorise',
-        {
+    data = {
             'amount': {
                 'value': int(payment_amount),
                 'currency': currency_code
+            },
+            "card": {
+                "cvc": "737"
             },
             'reference': merchant_reference,
             'merchantAccount': settings.MERCHANT_ACCOUNT,
@@ -29,6 +31,13 @@ def exec_recurring_payment(
                 'contract': contract_type
             }
         }
+
+    if cvc:
+        data["card"] = {"cvc": cvc}
+
+    return payment_api_request(
+        'authorise',
+        data
     )
 
 
