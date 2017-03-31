@@ -112,7 +112,7 @@ class Session(models.Model):
 
         return params
 
-    def exec_recurring_payment(self, cvc=None):
+    def exec_recurring_payment(self, recurring_detail_reference=None, cvc=None):
         """
         Executes the API call to Adyen to submit a recurring payment.
 
@@ -151,6 +151,7 @@ class Session(models.Model):
             merchant_reference=self.merchant_reference,
             payment_amount=self.payment_amount,
             currency_code=self.currency_code,
+            recurring_detail_reference=recurring_detail_reference,
             cvc=cvc
         )
 

@@ -11,6 +11,7 @@ def exec_recurring_payment(
     merchant_reference,
     payment_amount,
     currency_code,
+    recurring_detail_reference=None,
     cvc=None
 ):
     data = {
@@ -25,7 +26,7 @@ def exec_recurring_payment(
             'merchantAccount': settings.MERCHANT_ACCOUNT,
             'shopperEmail': shopper_email,
             'shopperReference': shopper_reference,
-            'selectedRecurringDetailReference': 'LATEST',
+            'selectedRecurringDetailReference': recurring_detail_reference or "LATEST",
             'shopperInteraction': shopper_interaction,
             'recurring': {
                 'contract': contract_type
