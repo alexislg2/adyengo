@@ -19,9 +19,9 @@ def exec_recurring_payment(
                 'value': int(payment_amount),
                 'currency': currency_code
             },
-            "card": {
-                "cvc": "737"
-            },
+            # "card": {
+            #     "cvc": "737"
+            # },
             'reference': merchant_reference,
             'merchantAccount': settings.MERCHANT_ACCOUNT,
             'shopperEmail': shopper_email,
