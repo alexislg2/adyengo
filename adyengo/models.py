@@ -188,7 +188,7 @@ class Session(models.Model):
 
 class SessionAllowedPaymentMethods(models.Model):
 
-    session = models.ForeignKey(Session, related_name='allowed_payment_methods')
+    session = models.ForeignKey(Session, related_name='allowed_payment_methods', on_delete=models.CASCADE)
     method = models.CharField(max_length=50, choices=constants.PAYMENT_METHODS.items())
 
     def __str__(self):
@@ -197,7 +197,7 @@ class SessionAllowedPaymentMethods(models.Model):
 
 class SessionBlockedPaymentMethods(models.Model):
 
-    session = models.ForeignKey(Session, related_name='blocked_payment_methods')
+    session = models.ForeignKey(Session, related_name='blocked_payment_methods', on_delete=models.CASCADE)
     method = models.CharField(max_length=50, choices=constants.PAYMENT_METHODS.items())
 
     def __str__(self):
@@ -233,7 +233,7 @@ class RecurringContract(models.Model):
 
 class RecurringContractDetail(models.Model):
 
-    recurring_contract = models.ForeignKey(RecurringContract, related_name='details')
+    recurring_contract = models.ForeignKey(RecurringContract, related_name='details', on_delete=models.CASCADE)
     key = models.CharField(max_length=100)
     value = models.CharField(max_length=250, blank=True)
 
@@ -243,7 +243,7 @@ class RecurringContractDetail(models.Model):
 
 class RecurringPaymentResult(models.Model):
 
-    session = models.ForeignKey(Session, related_name='recurring_payment_results')
+    session = models.ForeignKey(Session, related_name='recurring_payment_results', on_delete=models.CASCADE)
     psp_reference = models.BigIntegerField()
     result_code = models.CharField(max_length=30, choices=constants.RECURRING_PAYMENT_RESULT_CODES.items())
     auth_code = models.PositiveIntegerField(null=True)
@@ -282,7 +282,7 @@ class Notification(models.Model):
         choices=constants.CURRENCY_CODES.items(),
         default=settings.DEFAULT_CURRENCY_CODE
     )
-    session = models.ForeignKey(Session, null=True, blank=True)
+    session = models.ForeignKey(Session, null=True, blank=True, on_delete=models.CASCADE)
     creation_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

@@ -1,4 +1,4 @@
-from django.core import urlresolvers
+import django.urls
 from django.contrib import admin
 from .models import (
     Session, SessionAllowedPaymentMethods, SessionBlockedPaymentMethods,
@@ -56,7 +56,7 @@ class NotificationAdmin(admin.ModelAdmin):
     def session_link(self, instance):
 
         if instance.session.id:
-            change_url = urlresolvers.reverse(
+            change_url = django.urls.reverse(
                 'admin:adyengo_session_change',
                 args=(instance.session.id,)
             )
@@ -91,7 +91,7 @@ class RecurringPaymentResultAdmin(admin.ModelAdmin):
     def session_link(self, instance):
 
         if instance.session.id:
-            change_url = urlresolvers.reverse(
+            change_url = django.urls.reverse(
                 'admin:adyengo_session_change', args=(instance.session.id,)
             )
 
