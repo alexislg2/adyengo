@@ -14,7 +14,7 @@ class Session(models.Model):
 
     session_type = models.CharField(max_length=25, choices=constants.SESSION_TYPES.items())
     merchant_reference = models.CharField(max_length=80, unique=True)
-    payment_amount = models.PositiveSmallIntegerField()
+    payment_amount = models.PositiveIntegerField()
     currency_code = models.CharField(
         max_length=3,
         choices=constants.CURRENCY_CODES.items(),
