@@ -276,7 +276,7 @@ class Notification(models.Model):
     payment_method = models.CharField(max_length=50, choices=constants.PAYMENT_METHODS.items(), null=True, blank=True)
     operations = models.CharField(max_length=100, null=True, blank=True)
     reason = models.CharField(max_length=250, null=True, blank=True)
-    payment_amount = models.PositiveSmallIntegerField()
+    payment_amount = models.PositiveIntegerField()
     currency_code = models.CharField(
         max_length=3,
         choices=constants.CURRENCY_CODES.items(),
