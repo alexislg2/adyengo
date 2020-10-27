@@ -12,6 +12,7 @@ def exec_recurring_payment(
     payment_amount,
     currency_code,
     recurring_detail_reference=None,
+    shopper_statement=None,
     cvc=None
 ):
     data = {
@@ -30,7 +31,8 @@ def exec_recurring_payment(
             'shopperInteraction': shopper_interaction,
             'recurring': {
                 'contract': contract_type
-            }
+            },
+            'shopperStatement': shopper_statement,
         }
 
     if cvc:

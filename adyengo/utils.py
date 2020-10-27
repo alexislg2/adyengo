@@ -26,7 +26,7 @@ def merchant_sig(params, clean_params=True):
             'paymentAmount', 'paymentMethod', 'pspReference',
             'recurringContract', 'resURL', 'selectedRecurringDetailReference',
             'sessionValidity', 'shipBeforeDate', 'shopperEmail',
-            'shopperLocale', 'shopperReference', 'skinCode'
+            'shopperLocale', 'shopperReference', 'skinCode', 'shopperStatement'
         )
 
         return {
@@ -39,7 +39,6 @@ def merchant_sig(params, clean_params=True):
         params = clean_params(params)
 
     params = OrderedDict(sorted(params.items()))
-
     return calc_hmac(
         ':'.join(
             list(params.keys()) +

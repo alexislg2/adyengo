@@ -99,6 +99,7 @@ class Session(models.Model):
             'allowedMethods': ','.join([
                 m.method for m in self.allowed_payment_methods.all()
             ]),
+            'shopperStatement': self.shopper_statement,
             'blockedMethods': ','.join([
                 m.method for m in self.blocked_payment_methods.all()
             ])
@@ -152,7 +153,8 @@ class Session(models.Model):
             payment_amount=self.payment_amount,
             currency_code=self.currency_code,
             recurring_detail_reference=recurring_detail_reference,
-            cvc=cvc
+            cvc=cvc,
+            shopper_statement=self.shopper_statement
         )
 
         r = RecurringPaymentResult(
