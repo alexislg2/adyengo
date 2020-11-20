@@ -77,7 +77,7 @@ class Session(models.Model):
         if self.page_type == constants.PAGE_TYPE_SKIP:
             return settings.PAYMENT_PAGES_SKIP_URL
 
-    def hpp_params(self):
+    def hpp_params(self, merchant_account=settings.MERCHANT_ACCOUNT):
 
         params = {
             'merchantReference': self.merchant_reference,
@@ -85,7 +85,7 @@ class Session(models.Model):
             'currencyCode': self.currency_code,
             'shipBeforeDate': self.ship_before_date.isoformat(),
             'skinCode': self.skin_code,
-            'merchantAccount': settings.MERCHANT_ACCOUNT,
+            'merchantAccount': merchant_account,
             'shopperLocale': self.shopper_locale,
             'orderData': self.order_data,
             'sessionValidity': self.session_validity.isoformat(),

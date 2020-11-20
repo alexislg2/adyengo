@@ -13,7 +13,8 @@ def exec_recurring_payment(
     currency_code,
     recurring_detail_reference=None,
     shopper_statement=None,
-    cvc=None
+    cvc=None,
+    merchant_account=settings.MERCHANT_ACCOUNT
 ):
     data = {
             'amount': {
@@ -24,7 +25,7 @@ def exec_recurring_payment(
             #     "cvc": "737"
             # },
             'reference': merchant_reference,
-            'merchantAccount': settings.MERCHANT_ACCOUNT,
+            'merchantAccount': merchant_account,
             'shopperEmail': shopper_email,
             'shopperReference': shopper_reference,
             'selectedRecurringDetailReference': recurring_detail_reference or "LATEST",
@@ -44,11 +45,11 @@ def exec_recurring_payment(
     )
 
 
-def list_recurring_details(shopper_reference, contract_type):
+def list_recurring_details(shopper_reference, contract_type, merchant_account=settings.MERCHANT_ACCOUNT):
     return recurring_api_request(
         'listRecurringDetails',
         {
-            'merchantAccount': settings.MERCHANT_ACCOUNT,
+            'merchantAccount': merchant_account,
             'recurring': {
                 'contract': contract_type
             },
@@ -57,11 +58,11 @@ def list_recurring_details(shopper_reference, contract_type):
     )
 
 
-def disable_recurring_details(shopper_reference, recurring_detail_reference):
+def disable_recurring_details(shopper_reference, recurring_detail_reference, merchant_account=settings.MERCHANT_ACCOUNT):
     return recurring_api_request(
         'disable',
         {
-            'merchantAccount': settings.MERCHANT_ACCOUNT,
+            'merchantAccount': merchant_account,
             'shopperReference': shopper_reference,
             'recurringDetailReference': recurring_detail_reference
         }
