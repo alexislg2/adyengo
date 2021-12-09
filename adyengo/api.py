@@ -1,5 +1,6 @@
 import json
 import requests
+from django.utils import timezone
 from . import settings
 
 
@@ -54,7 +55,7 @@ def list_recurring_details(shopper_reference, contract_type, merchant_account=se
                 'contract': contract_type
             },
             'shopperReference': shopper_reference
-        }
+        },
     )
 
 
@@ -74,17 +75,27 @@ def payment_link(
     merchant_reference,
     payment_amount,
     currency_code, 
-    merchant_account=settings.MERCHANT_ACCOUNT):
-    return checkout_api_request(
-        'paymentLinks',
-        {
+    merchant_account=settings.MERCHANT_ACCOUNT,
+    locale=None,
+    shopper_reference=None
+    ):
+    data = {
             'amount': {
                 'value': int(payment_amount),
                 'currency': currency_code
             },
             'merchantAccount': merchant_account,
             'reference': merchant_reference,
-        })
+            'expiresAt': (timezone.now() + timezone.timedelta(days=60)).isoformat()
+        }
+    if locale:
+        data['shopperLocale'] = locale
+    if shopper_reference:
+        data['shopperReference'] = shopper_reference
+    return checkout_api_request(
+        'paymentLinks',
+        data
+        )
 
 def checkout_api_request(endpoint, data):
     return checkout_api_base_request(
