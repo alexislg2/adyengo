@@ -69,6 +69,30 @@ def disable_recurring_details(shopper_reference, recurring_detail_reference, mer
     )
 
 
+def payment_link(
+    shopper_email,
+    merchant_reference,
+    payment_amount,
+    currency_code, 
+    merchant_account=settings.MERCHANT_ACCOUNT):
+    return checkout_api_request(
+        'paymentLinks',
+        {
+            'amount': {
+                'value': int(payment_amount),
+                'currency': currency_code
+            },
+            'merchantAccount': merchant_account,
+            'reference': merchant_reference,
+        })
+
+def checkout_api_request(endpoint, data):
+    return checkout_api_base_request(
+        '{}{}'.format(settings.CHECKOUT_API_BASE_URL.replace('PREFIX', settings.PREFIX_URL), endpoint),
+        data
+    )
+
+
 def payment_api_request(endpoint, data):
     return api_request(
         '{}{}'.format(settings.PAYMENT_API_BASE_URL, endpoint),
@@ -81,6 +105,15 @@ def recurring_api_request(endpoint, data):
         '{}{}'.format(settings.RECURRING_API_BASE_URL, endpoint),
         data
     )
+
+def checkout_api_base_request(url, data):
+    return requests.post(
+        url,
+        headers={
+            'Content-Type': 'application/json',
+            'X-API-Key': settings.API_KEY},
+        data=json.dumps(data)
+    ).json()
 
 
 def api_request(url, data):

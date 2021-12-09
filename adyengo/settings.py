@@ -39,6 +39,8 @@ DEFAULT_RES_URL = adyengo_settings.get('DEFAULT_RES_URL', None)
 # The credentials for the Adyen API
 API_USERNAME = adyengo_settings.get('API_USERNAME', None)
 API_PASSWORD = adyengo_settings.get('API_PASSWORD', None)
+PREFIX_URL = adyengo_settings.get('PREFIX_URL', None)
+API_KEY = adyengo_settings.get('API_KEY', None)
 
 if MODE == 'test':
     PAYMENT_PAGES_MULTIPLE_URL = 'https://test.adyen.com/hpp/select.shtml'
@@ -46,6 +48,8 @@ if MODE == 'test':
     PAYMENT_PAGES_SKIP_URL = 'https://test.adyen.com/hpp/details.shtml'
     PAYMENT_API_BASE_URL = 'https://pal-test.adyen.com/pal/servlet/Payment/v12/'
     RECURRING_API_BASE_URL = 'https://pal-test.adyen.com/pal/servlet/Recurring/v12/'
+    CHECKOUT_API_BASE_URL = 'https://checkout-test.adyen.com/v68/'
+
 
 if MODE == 'live':
     PAYMENT_PAGES_MULTIPLE_URL = 'https://live.adyen.com/hpp/select.shtml'
@@ -53,3 +57,5 @@ if MODE == 'live':
     PAYMENT_PAGES_SKIP_URL = 'https://live.adyen.com/hpp/details.shtml'
     PAYMENT_API_BASE_URL = 'https://pal-live.adyen.com/pal/servlet/Payment/v12/'
     RECURRING_API_BASE_URL = 'https://pal-live.adyen.com/pal/servlet/Recurring/v12/'
+    CHECKOUT_API_BASE_URL = 'https://PREFIX-checkout-live.adyenpayments.com/checkout/v68/'
+
