@@ -74,20 +74,20 @@ def payment_link(
     shopper_email,
     merchant_reference,
     payment_amount,
-    currency_code, 
+    currency_code,
     merchant_account=settings.MERCHANT_ACCOUNT,
     locale=None,
     shopper_reference=None
-    ):
+):
     data = {
-            'amount': {
-                'value': int(payment_amount),
-                'currency': currency_code
-            },
-            'merchantAccount': merchant_account,
-            'reference': merchant_reference,
-            'expiresAt': (timezone.now() + timezone.timedelta(days=60)).isoformat()
-        }
+        'amount': {
+            'value': int(payment_amount),
+            'currency': currency_code
+        },
+        'merchantAccount': merchant_account,
+        'reference': merchant_reference,
+        'expiresAt': (timezone.now() + timezone.timedelta(days=60)).isoformat()
+    }
     if locale:
         data['shopperLocale'] = locale
     if shopper_reference:
@@ -95,7 +95,41 @@ def payment_link(
     return checkout_api_request(
         'paymentLinks',
         data
-        )
+    )
+
+
+def session(
+    merchant_reference,
+    payment_amount,
+    currency_code,
+    merchant_account=settings.MERCHANT_ACCOUNT,
+    shopper_email=None,
+    return_url=None,
+    locale=None,
+    shopper_reference=None
+):
+    data = {
+        'amount': {
+            'value': int(payment_amount),
+            'currency': currency_code
+        },
+        'merchantAccount': merchant_account,
+        'reference': merchant_reference,
+        'shopperEmail': shopper_email,
+        'returnUrl': return_url,
+        'enableOneClick': True,
+        'enableRecurring': True,
+    }
+    if locale:
+        data['shopperLocale'] = locale
+    if shopper_reference:
+        data['shopperReference'] = shopper_reference
+    print(data)
+    return checkout_api_request(
+        'sessions',
+        data
+    )
+
 
 def checkout_api_request(endpoint, data):
     return checkout_api_base_request(
