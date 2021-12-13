@@ -106,7 +106,8 @@ def session(
     shopper_email=None,
     return_url=None,
     locale=None,
-    shopper_reference=None
+    shopper_reference=None,
+    ip=None
 ):
     data = {
         'amount': {
@@ -122,9 +123,10 @@ def session(
     }
     if locale:
         data['shopperLocale'] = locale
+    if ip:
+        data['shopperIP'] = ip
     if shopper_reference:
         data['shopperReference'] = shopper_reference
-    print(data)
     return checkout_api_request(
         'sessions',
         data
