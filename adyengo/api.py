@@ -107,7 +107,8 @@ def session(
     return_url=None,
     locale=None,
     shopper_reference=None,
-    ip=None
+    ip=None,
+    blocked_payment_methods=[]
 ):
     data = {
         'amount': {
@@ -120,6 +121,7 @@ def session(
         'returnUrl': return_url,
         'enableOneClick': True,
         'enableRecurring': True,
+        'blockedPaymentMethods': blocked_payment_methods,
     }
     if locale:
         data['shopperLocale'] = locale
