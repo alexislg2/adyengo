@@ -48,11 +48,11 @@ def merchant_sig(params, clean_params=True):
 
 
 def calc_hmac(string, hmac_key=settings.HMAC_KEY):
-    return base64.encodestring(hmac.new(
+    return base64.b64encode(hmac.new(
         binascii.a2b_hex(hmac_key.encode()),
         string.encode(),
         hashlib.sha256
-    ).digest()).strip().decode()
+    ).digest()).decode()
 
 
 def escape_values(values):
