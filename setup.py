@@ -5,7 +5,7 @@ VERSION = '0.1'
 REQUIREMENTS = (
     'ipaddress>=1.0.22',
     'python-dateutil>=2.8.1',
-    'requests==2.25.1'
+    'requests>=2.25.1'
 )
 TEST_REQUIREMENTS = (
 )
