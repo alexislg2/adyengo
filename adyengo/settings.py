@@ -48,7 +48,7 @@ if MODE == 'test':
     PAYMENT_PAGES_SKIP_URL = 'https://test.adyen.com/hpp/details.shtml'
     PAYMENT_API_BASE_URL = 'https://pal-test.adyen.com/pal/servlet/Payment/v12/'
     RECURRING_API_BASE_URL = 'https://pal-test.adyen.com/pal/servlet/Recurring/v12/'
-    CHECKOUT_API_BASE_URL = 'https://checkout-test.adyen.com/v68/'
+    CHECKOUT_API_BASE_URL = 'https://checkout-test.adyen.com/v71/'
 
 
 if MODE == 'live':
@@ -57,5 +57,5 @@ if MODE == 'live':
     PAYMENT_PAGES_SKIP_URL = 'https://live.adyen.com/hpp/details.shtml'
     PAYMENT_API_BASE_URL = 'https://pal-live.adyen.com/pal/servlet/Payment/v12/'
     RECURRING_API_BASE_URL = 'https://pal-live.adyen.com/pal/servlet/Recurring/v12/'
-    CHECKOUT_API_BASE_URL = 'https://PREFIX-checkout-live.adyenpayments.com/checkout/v68/'
+    CHECKOUT_API_BASE_URL = 'https://PREFIX-checkout-live.adyenpayments.com/checkout/v71/'
 
