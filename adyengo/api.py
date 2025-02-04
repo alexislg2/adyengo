@@ -77,7 +77,8 @@ def payment_link(
     currency_code,
     merchant_account=settings.MERCHANT_ACCOUNT,
     locale=None,
-    shopper_reference=None
+    shopper_reference=None,
+    save_payment_method=False
 ):
     data = {
         'amount': {
@@ -85,9 +86,14 @@ def payment_link(
             'currency': currency_code
         },
         'merchantAccount': merchant_account,
+        'shopperEmail': shopper_email,
         'reference': merchant_reference,
         'expiresAt': (timezone.now() + timezone.timedelta(days=60)).isoformat()
     }
+    if save_payment_method:
+        data['storePaymentMethodMode'] = 'enabled'
+        data['recurringProcessingModel'] = 'UnscheduledCardOnFile'
+    
     if locale:
         data['shopperLocale'] = locale
     if shopper_reference:
